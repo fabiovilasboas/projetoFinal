@@ -1,7 +1,26 @@
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-</form>
+{% block title %} Página de Login {% endblock %}
+
+{% block main %}
+
+     <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-info">Login</button>
+
+    </form>
+
+{% endblock %}
+
+    {% block footer %}
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Desenvolvimento Web com Django 2.0</span>
+            </div>
+        </footer>
+    {% endblock %}
+
+
