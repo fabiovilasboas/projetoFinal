@@ -7,8 +7,22 @@ from .forms import PersonForm
 
 @login_required
 def persons_list(request):
+    nome = request.GET.get('nome', None)
+    sobrenome = request.GET.get('sobrenome', None)
+
+    if nome or sobrenome:
+         persons = Person.objects.filter(first_name__icontains=nome, last_name__icontains=sobrenome)
+    else:
+        persons = Person.objects.all()
+    return render(
+        request, 'person.html', {'persons': persons})
+
+    
+
     persons = Person.objects.all()
     return render(request, 'person.html', {'persons': persons})
+
+
 @login_required
 def persons_new(request):
     form = PersonForm(request.POST or None, request.FILES or None)
